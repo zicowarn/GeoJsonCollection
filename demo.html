@@ -357,21 +357,21 @@
             let option = {
               tooltip: {
                 trigger: 'item',
-                formatter: '{b}'
+                showDelay: 0,
+                transitionDuration: 0.2
               },
               geo: {
-                map: 'customMap',  // 这里指定地图名称
-                roam: false,
-                zoom: 1.2
+                // 使用 registerMap 注册的地图名称。
+                map: name,
+                roam: true,
               },
+              
               series: [{
                   type: 'map',
+                  // geoIndex: 0,
+                  roam: true,
                   map: 'customMap',  // 地图名称与上面geo的map相同
                   data: [],  // 您可以在这里添加数据
-                  itemStyle: {
-                    areaColor: '#ccc',
-                    borderColor: '#fff'
-                  },
                   label: {
                     show: true,
                     emphasis: {
@@ -384,7 +384,7 @@
               echarts.registerMap('customMap', geoJsonData);
               
               // 使用配置项设置图表
-              myChart.setOption(option);
+              myChart.setOption(option, true);
           }, 
           init() {
             // 初始化方法
@@ -405,6 +405,7 @@
             const chart4 = echarts.getInstanceByDom(document.getElementById('diagram4'));
             const chart5 = echarts.getInstanceByDom(document.getElementById('diagram5'));
             const chart6 = echarts.getInstanceByDom(document.getElementById('diagram6'));
+            const chartMaps = echarts.getInstanceByDom(document.getElementById('diagramMaps'));
             
             chart1.resize();
             chart2.resize();
@@ -412,6 +413,7 @@
             chart4.resize();
             chart5.resize();
             chart6.resize();
+            chartMaps.resize();
           }
         },
         mounted() {
